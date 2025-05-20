@@ -24,6 +24,6 @@
  - Manage to get different configurations
    working (to display the buttons correctly).
  - Make different "skins"
+ - make exe(?)
  
- 
-# TestiCl
+# TestiCL
