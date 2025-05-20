@@ -29,9 +29,9 @@
 
 
 
- *"I get the ball references... but what the fuck does it have to do with Westerns?"
+ **"I get the ball references... but what the fuck does it have to do with Westerns?"
 
 ...
 
-idk*
+idk**
 # TestiCL
