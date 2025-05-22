@@ -1,6 +1,7 @@
 '# coding=utf-8'
 import pygame
 import curses
+import time
 from curses import wrapper
 
 
@@ -35,6 +36,40 @@ def main(stdscr):
     stdscr.clear()
     for y, line in enumerate(header.splitlines(), 2):
         stdscr.addstr(y, 60, line)
+    
+    curses.start_color()
+    curses.init_color(17, 200,200,200)
+    pad = curses.newpad(20,42)
+    testi = '''
+    ███████ ███  ██████████ ██ ██████ ██    
+    █ ███ █ █    ██ ██  ██  ██ ███ ██ ██    
+      ███   ██    ██    ██  ██ ███    ██    
+      ███   ██   █ ██   ██  ██ ███ ██ ██    
+      ███   █  █ ██ ██  ██  ██ ███ ██ ██    
+      ███   ████ █████  ██  ██ ██  ██ ██   █
+      ███                      ███ ██ ██ ███
+      ███                      ██████ ██████ 
+      
+      
+      
+      
+      
+      
+    A CLI gamepad input tester
+      '''
+
+    stdscr.refresh()
+    for y, line in enumerate(testi.splitlines(), 2):
+        pad.addstr(y, 0, line, 17)
+        
+    for i in range(20):
+        #stdscr.clear()
+        stdscr.refresh()
+        pad.refresh(0, 2, 0, 0, i, 42)
+        time.sleep(0.1)
+        if i == 16:
+            continue
+            
     while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -127,15 +162,16 @@ def main(stdscr):
 
         joystick_count = pygame.joystick.get_count()
 
-
+	
         for joystick in joysticks.values():
             jid = joystick.get_instance_id()
             #print(f"Joystick {jid}")
-
-
+            
+            #window_1 = curses.newwin(3, 40, 20, 60)
+            #window_1.refresh()
             # Get the name from the OS for the controller/joystick.
             name = joystick.get_name()
-            stdscr.addstr(19, 86, name.center(33))
+            stdscr.addstr(20, 86, name, 17)
             #print(f"Joystick name: {name}")
 
             guid = joystick.get_guid()
