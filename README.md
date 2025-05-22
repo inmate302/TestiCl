@@ -1,3 +1,4 @@
+<pre>
 ################################################################
 
             ███████ ███  ██████████ ██ ██████ ██    
@@ -17,7 +18,7 @@
  	        Western and ball inspired...)
 
 
-#######################    USAGE    ############################
+#########################    USAGE    ##########################
 
   - git clone https://github.com/inmate302/TestiCl
     to directory
@@ -36,3 +37,4 @@ NOTE: before you run it, make sure your terminal is maximized
      working (to display the buttons correctly).
    - Make different "skins"
    - make .exe for non dev friends(?)
+</pre>
