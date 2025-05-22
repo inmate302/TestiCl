@@ -25,5 +25,13 @@
    working (to display the buttons correctly).
  - Make different "skins"
  - make exe(?)
- 
+
+
+
+
+_ "I get the ball references... but what the fuck does it have to do with Westerns?"
+
+...
+
+idk_
 # TestiCL
