@@ -16,7 +16,17 @@
  		managed to be both 
  	     Western and ball inspired...)
 
-#######################  TODO  ##############################
+
+#######################   USAGE   ###########################
+- git clone https://github.com/inmate302/TestiCl
+  to directory
+- run python TestiCL.py on your terminal
+
+NOTE: before you run it, make sure your terminal is maximized
+      for it to display properly (until I figure out how to
+      make it redraw properly :FeelsBadMan:
+
+#########################  TODO  ############################
 
  - Finish presentation details.
  - Make the device name be centered.
