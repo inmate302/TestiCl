@@ -34,4 +34,4 @@ NOTE: before you run it, make sure your terminal is maximized
  - Manage to get different configurations
    working (to display the buttons correctly).
  - Make different "skins"
- - make exe(?)
+ - make .exe for non dev friends(?)
