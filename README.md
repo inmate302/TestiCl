@@ -26,7 +26,7 @@
 
 NOTE: before you run it, make sure your terminal is maximized
       for it to display properly (until I figure out how to
-      make it redraw properly :FeelsBadMan:
+      make it redraw properly :FeelsBadMan:)
       If you're on Windows you can still run it outside a terminal
       but resizing breaks the program :c
 
