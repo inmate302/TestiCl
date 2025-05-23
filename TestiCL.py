@@ -40,9 +40,15 @@ def main(stdscr):
     joysticks = {}
     done = False
     curses.curs_set(0)
-    stdscr.clear()
-    for y, line in enumerate(header.splitlines(), 2):
-        stdscr.addstr(y, 60, line)
+    joystick_count = pygame.joystick.get_count()
+    #window_2 = curses.newwin(60, 60, 0, 60)            
+    if joystick_count == 0:
+        msg = "Please, connect a controller..."
+        stdscr.addstr(10, 80, msg, 17)
+    else:
+        stdscr.clear()
+        for y, line in enumerate(header.splitlines(), 2):
+            stdscr.addstr(y, 60, line)
     
     curses.start_color()
     curses.init_color(17, 200,200,200)
@@ -64,10 +70,12 @@ def main(stdscr):
       
     A CLI gamepad input tester
       '''
-
+        
     stdscr.refresh()
     for y, line in enumerate(testi.splitlines(), 2):
         pad.addstr(y, 0, line, 17)
+    
+
         
     for i in range(20):
         #stdscr.clear()
@@ -158,16 +166,25 @@ def main(stdscr):
             if event.type == pygame.JOYDEVICEADDED:
                 joy = pygame.joystick.Joystick(event.device_index)
                 joysticks[joy.get_instance_id()] = joy
+                stdscr.refresh()
+                for y, line in enumerate(header.splitlines(), 2):
+                    stdscr.addstr(y, 60, line)
 
             if event.type == pygame.JOYDEVICEREMOVED:
                 del joysticks[event.instance_id]
+                stdscr.refresh()
+                msg = "Please, connect a controller..."
+                stdscr.addstr(10, 80, msg, 17)
 
 
         joystick_count = pygame.joystick.get_count()
-
+        
 	
         for joystick in joysticks.values():
             jid = joystick.get_instance_id()
+                        
+
+                #window_2.addstr(14, 86, msg, 17)
             #print(f"Joystick {jid}")
             
             #window_1 = curses.newwin(3, 40, 20, 60)
