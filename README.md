@@ -24,7 +24,8 @@
     to directory
   - run python TestiCL.py on your terminal
   - you may need to install pygame
-  - or just run with `uv`¹: `uv run TestiCL.py` (it automatically installs dependencies)
+  - or just run with `uv`¹: `uv run TestiCL.py` 
+    (it automatically installs dependencies)
 
 NOTE: before you run it, make sure your terminal is maximized
       for it to display properly (until I figure out how to
