@@ -14,7 +14,8 @@ from curses import wrapper
 
 
 def main(stdscr):
-    header = """ 
+    # the (r) prefix is to make the string raw, so the backslashes are not treated as escape characters.
+    header = r"""
              _=====_                               _=====_      
             / ===== \                             / ===== \     
           +.-'_____'-.---------------------------.-'_____'-.+   
@@ -40,6 +41,32 @@ def main(stdscr):
     joysticks = {}
     done = False
     curses.curs_set(0)
+    
+    def check_terminal_size():
+        max_y, max_x = stdscr.getmaxyx()
+        if max_x < 120 or max_y < 30:
+            stdscr.clear()
+            resize_msg = "Please resize your terminal window to at least 120x30 characters for optimal display"
+            y_pos = min(max_y - 2, max_y // 2)
+            x_pos = max(0, (max_x - len(resize_msg)) // 2)
+            try:
+                stdscr.addstr(y_pos, x_pos, resize_msg, curses.A_BOLD)
+                stdscr.refresh()
+                return False
+            except curses.error:
+                try:
+                    stdscr.addstr(0, 0, "Please resize terminal window", curses.A_BOLD)
+                    stdscr.refresh()
+                    return False
+                except curses.error:
+                    return False
+        return True
+
+    # Initial size check
+    if not check_terminal_size():
+        stdscr.getch()
+        stdscr.clear()
+    
     joystick_count = pygame.joystick.get_count()
     #window_2 = curses.newwin(60, 60, 0, 60)            
     if joystick_count == 0:
@@ -86,6 +113,12 @@ def main(stdscr):
             continue
             
     while not done:
+        # Check terminal size at the start of each loop iteration
+        if not check_terminal_size():
+            stdscr.getch()
+            stdscr.clear()
+            continue
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True  # Flag that we are done so we exit this loop.
@@ -192,7 +225,17 @@ def main(stdscr):
 		
             # Get the name from the OS for the controller/joystick.
             name = joystick.get_name()
-            stdscr.addstr(20, 86, name, 17)
+            try:
+                # Truncate name if it's too long (max 30 characters)
+                display_name = name[:30] if len(name) > 30 else name
+                stdscr.addstr(20, 86, display_name, 17)
+            except curses.error:
+                # If we still get an error, try a different position
+                try:
+                    stdscr.addstr(20, 60, display_name, 17)
+                except curses.error:
+                    pass  # Silently fail if  still can't display it
+            #TODO: we still need to properly represent the ascii art with resizing.
 
             guid = joystick.get_guid()
 
