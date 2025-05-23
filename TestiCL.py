@@ -1,4 +1,11 @@
+# /// script
+# dependencies = [
+#   "pygame",
+# ]
+# ///
+
 '# coding=utf-8'
+
 import pygame
 import curses
 import time
