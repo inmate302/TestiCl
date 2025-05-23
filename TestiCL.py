@@ -149,15 +149,11 @@ def main(stdscr):
 
             # Handle hotplugging
             if event.type == pygame.JOYDEVICEADDED:
-                # This event will be generated when the program starts for every
-                # joystick, filling up the list without needing to create them manually.
                 joy = pygame.joystick.Joystick(event.device_index)
                 joysticks[joy.get_instance_id()] = joy
-                #print(f"Joystick {joy.get_instance_id()} connencted")
 
             if event.type == pygame.JOYDEVICEREMOVED:
                 del joysticks[event.instance_id]
-                #print(f"Joystick {event.instance_id} disconnected")
 
 
         joystick_count = pygame.joystick.get_count()
@@ -169,23 +165,20 @@ def main(stdscr):
             
             #window_1 = curses.newwin(3, 40, 20, 60)
             #window_1.refresh()
+		
             # Get the name from the OS for the controller/joystick.
             name = joystick.get_name()
             stdscr.addstr(20, 86, name, 17)
-            #print(f"Joystick name: {name}")
 
             guid = joystick.get_guid()
 
             power_level = joystick.get_power_level()
 
-            # Usually axis run in pairs, up/down for one, and left/right for
-            # the other. Triggers count as axes.
+
             axes = joystick.get_numaxes()
-            #print(f"Number of axes: {axes}")
 
         for i in range(axes):
                 axis = joystick.get_axis(i)
-                #print(f"Axis {i} value: {axis:>6.3f}")
           
 
         #buttons = ["A","B","X","Y","LB","RB","LT","RT","Select", "Start"]
