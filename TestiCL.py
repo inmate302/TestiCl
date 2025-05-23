@@ -184,7 +184,7 @@ def main(stdscr):
 
             axes = joystick.get_numaxes()
 
-        for i in range(axes):
+            for i in range(axes):
                 axis = joystick.get_axis(i)
           
 
