@@ -24,11 +24,11 @@ def main(stdscr):
        / |      |      | ;  __           _   ; | _         _ | ;
        | | <---   ---> | | |__|         |_:> | ||_|       (_)| |
        | |___   |   ___| ;SELECT       START ; |___       ___| ;
-       |\    | \|/ |    /  _     ___      _   \    | (X) |    /|
-       | \   |_____|  .','" "', |___|  ,'" "', '.  |_____|  .' |
-       |  '-.______.-' /       \ANALOG/       \  '-._____.-'   |
-       |               |       |------|       |                |
-       |              /\       /      \       /\               |
+       |\    | \|/ |    / ___    ___     ___  \    | (X) |    /|
+       | \   |_____|  .'/.....\ |___|  /.....\ '.  |_____|  .' |
+       |  '-.______.-' /.     .\ANALOG/.     .\  '-._____.-'   |
+       |               |.     .|------|.     .|                |
+       |              /\ ..... /      \ ..... /\               |
        |             /  '.___.'        '.___.'  \              |
        |            /                            \             |
         \          /                              \           / 
@@ -36,6 +36,7 @@ def main(stdscr):
     #                        PS2 CONTROLLER                       
 
     
+
 
     pygame.init()
     joysticks = {}
@@ -111,6 +112,134 @@ def main(stdscr):
         time.sleep(0.1)
         if i == 16:
             continue
+    
+#    thumbsticks = curses.newpad(8,25) ##### wanted to be fancy with it and use pads and windows and shit... 
+#					     but shit kept erroring out.
+#    thumbstickLup = r"""
+# /.....   ___     ___  \
+#'.     . |___|  /.....\ 
+#/.     .\ANALOG/.     .\
+#| ..... |------|.     .| 
+#\       /      \ ..... /
+# '.___.'        '.___.' """
+#
+##########################################################################################################
+#
+#
+#  Here's where the stuff for the thumbsticks will go.
+#   
+#
+##########################################################################################################
+
+    #######################   LS UP   #######################
+    ls_up = r"""
+       |\    | \|/ |    /.....   ___     ___  \    | (X) |    /|
+       | \   |_____|  .'.     . |___|  /.....\ '.  |_____|  .' |
+       |  '-.______.-' /.     .\ANALOG/.     .\  '-._____.-'   |
+       |               | ..... |------|.     .|                |
+       |              /\       /      \ ..... /\               |
+       |             /  '.___.'        '.___.'  \              |"""
+    
+    #######################  LS DOWN  #######################
+    ls_down = r"""
+       |\    | \|/ |    / ___    ___     ___  \    | (X) |    /|
+       | \   |_____|  .'/     \ |___|  /.....\ '.  |_____|  .' |
+       |  '-.______.-' / ..... \ANALOG/.     .\  '-._____.-'   |
+       |               |.     .|------|.     .|                |
+       |              /\.     ./      \ ..... /\               |
+       |             /  '.....'        '.___.'  \              |"""
+    
+    #######################  LS LEFT  $$#####################
+    ls_left = r"""
+       |\    | \|/ |    / ___    ___     ___  \    | (X) |    /|
+       | \   |_____|  .....   \ |___|  /.....\ '.  |_____|  .' |
+       |  '-.______.-.     .   \ANALOG/.     .\  '-._____.-'   |
+       |             .     .   |------|.     .|                |
+       |              .....    /      \ ..... /\               |
+       |             /  '.___.'        '.___.'  \              |"""
+
+    ######################  LS RIGHT  #######################
+    ls_right = r"""
+       |\    | \|/ |    / ___    ___     ___  \    | (X) |    /|
+       | \   |_____|  .'/   .....___|  /.....\ '.  |_____|  .' |
+       |  '-.______.-' /   .     .ALOG/.     .\  '-._____.-'   |
+       |               |   .     .----|.     .|                |
+       |              /\    .....     \ ..... /\               |
+       |             /  '.___.'        '.___.'  \              |"""
+
+    #######################   RS UP   #######################
+    rs_up = r"""
+       |\    | \|/ |    / ___    ___    ..... \    | (X) |    /|
+       | \   |_____|  .'/.....\ |___|  .     . '.  |_____|  .' |
+       |  '-.______.-' /.     .\ANALOG/.     .\  '-._____.-'   |
+       |               |.     .|------| ..... |                |
+       |              /\ ..... /      \       /\               |
+       |             /  '.___.'        '.___.'  \              |"""
+
+    #######################  RS DOWN  #######################
+    rs_down = r"""
+       |\    | \|/ |    / ___    ___     ___  \    | (X) |    /|
+       | \   |_____|  .'/.....\ |___|  /     \ '.  |_____|  .' |
+       |  '-.______.-' /.     .\ANALOG/ ..... \  '-._____.-'   |
+       |               |.     .|------|.     .|                |
+       |              /\ ..... /      \.     ./\               |
+       |             /  '.___.'        '.....'  \              |"""
+
+    #######################  RS LEFT  #######################
+    rs_left = r"""
+       |\    | \|/ |    / ___    ___     ___  \    | (X) |    /|
+       | \   |_____|  .'/.....\ |___|.....   \ '.  |_____|  .' |
+       |  '-.______.-' /.     .\ANAL.     .   \  '-._____.-'   |
+       |               |.     .|----.     .   |                |
+       |              /\ ..... /     .....    /\               |
+       |             /  '.___.'        '.___.'  \              |"""
+
+    ######################  RS RIGHT  #######################
+    rs_right = r"""
+       |\    | \|/ |    / ___    ___     ___  \    | (X) |    /|
+       | \   |_____|  .'/.....\ |___|  /   ......  |_____|  .' |
+       |  '-.______.-' /.     .\ANALOG/   .     .'-._____.-'   |
+       |               |.     .|------|   .     .              |
+       |              /\ ..... /      \    .....               |
+       |             /  '.___.'        '.___.'  \              |"""
+
+    ######################  BOTH LEFT  $#####################
+    both_left = r""" 
+       |\    | \|/ |    / ___    ___     ___  \    | (X) |    /|
+       | \   |_____|  .....   \ |___|.....   \ '.  |_____|  .' |
+       |  '-.______.-.     .   \ANAL.     .   \  '-._____.-'   |
+       |             .     .   |----.     .   |                |
+       |              .....    /     .....    /\               |
+       |             /  '.___.'        '.___.'  \              |"""
+
+
+    ######################  BOTH RIGHT  #####################
+    both_right = r"""
+       |\    | \|/ |    / ___    ___     ___  \    | (X) |    /|
+       | \   |_____|  .'/   .....___|  /   ......  |_____|  .' |
+       |  '-.______.-' /   .     .ALOG/   .     .'-._____.-'   |
+       |               |   .     .----|   .     .              |
+       |              /\    .....     \    .....               |
+       |             /  '.___.'        '.___.'  \              |"""
+
+    ######################   BOTH UP   ######################
+    both_up = r"""
+       |\    | \|/ |    /.....   ___    ..... \    | (X) |    /|
+       | \   |_____|  .'.     . |___|  .     . '.  |_____|  .' |
+       |  '-.______.-' /.     .\ANALOG/.     .\  '-._____.-'   |
+       |               | ..... |------| ..... |                |
+       |              /\       /      \       /\               |
+       |             /  '.___.'        '.___.'  \              |"""
+
+    ######################  BOTH DOWN  #####################
+    both_down = r"""
+       |\    | \|/ |    / ___    ___     ___  \    | (X) |    /|
+       | \   |_____|  .'/     \ |___|  /     \ '.  |_____|  .' |
+       |  '-.______.-' / ..... \ANALOG/ ..... \  '-._____.-'   |
+       |               |.     .|------|.     .|                |
+       |              /\.     ./      \.     ./\               |
+       |             /  '.....'        '.....'  \              |"""
+
             
     while not done:
         # Check terminal size at the start of each loop iteration
@@ -135,15 +264,21 @@ def main(stdscr):
                 if event.button == 3:
                     stdscr.addstr(7, 113, "   ", curses.A_REVERSE)
                 if event.button == 4:
-                    stdscr.addstr(4, 112, "     ")
-                    stdscr.addstr(4, 112, "_____")
-                if event.button == 5:
                     stdscr.addstr(4, 74, "     ")
                     stdscr.addstr(4, 74, "_____")
+                if event.button == 5:
+                    stdscr.addstr(4, 112, "     ")
+                    stdscr.addstr(4, 112, "_____")
                 if event.button == 6:
                     stdscr.addstr(9, 88, "   ", curses.A_REVERSE)
                 if event.button == 7:
                     stdscr.addstr(9, 100, "   ", curses.A_REVERSE)
+                if event.button == 8:
+                    stdscr.addstr(9, 86, "", curses.A_REVERSE)
+                if event.button == 9:
+                    stdscr.addstr(14, 87, "LS")
+                if event.button == 10:
+                    stdscr.addstr(14, 101, "RS")
             if event.type == pygame.JOYHATMOTION:
                 if event.hat == 0:
                     if event.value == (-1,0):
@@ -170,19 +305,85 @@ def main(stdscr):
                         #stdscr.clear()
                         for y, line in enumerate(header.splitlines(), 2):
                             stdscr.addstr(y, 60, line)
+
+#######################   Left and right thumbsticks go down here    #########################################################
+
             if event.type == pygame.JOYAXISMOTION:
+                if event.axis == 0:
+                    if event.value >= 0 and event.value != 1:
+                        for y, line in enumerate(header.splitlines(), 2):
+                            stdscr.addstr(y, 60, line)
+                            stdscr.refresh()
+                    if event.value == 1:
+                        for y, line in enumerate(ls_right.splitlines(), 2):
+                            stdscr.addstr(y+8, 60, line)
+                            stdscr.refresh()
+                    if event.value < 0:
+                        for y, line in enumerate(ls_left.splitlines(), 2):
+                            stdscr.addstr(y+8, 60, line)
+                            stdscr.refresh()
+                    
+                    #if event.value < 1:
+                        #stdscr.clear()
+                       # for y, line in enumerate(header.splitlines(), 2):
+                           # stdscr.addstr(y, 60, line)
+                if event.axis == 1:
+                    for y, line in enumerate(header.splitlines(), 2):
+                        stdscr.addstr(y, 60, line)
+                        stdscr.refresh()
+                    if event.value > 0 and event.value > 0.800:
+                        for y, line in enumerate(ls_down.splitlines(), 2):
+                            stdscr.addstr(y+8, 60, line)
+                            stdscr.refresh()
+                    elif event.value < -0.5:
+                    	for y, line in enumerate(ls_up.splitlines(), 2):
+                            stdscr.addstr(y+8, 60, line)
+                            stdscr.refresh()
+                           # for y, line in enumerate(thumbstickLup.splitlines(), 2):
+                               # thumbsticks.addstr(y, 0, line)
+                                #thumbsticks.refresh(0, 0, 9, 83, 16, 108)
+                
+                if event.axis == 3:
+                    if event.value >= 0 and event.value != 1:
+                        for y, line in enumerate(header.splitlines(), 2):
+                            stdscr.addstr(y, 60, line)
+                            stdscr.refresh()
+                    if event.value == 1:
+                        for y, line in enumerate(rs_right.splitlines(), 2):
+                            stdscr.addstr(y+8, 60, line)
+                            stdscr.refresh()
+                    if event.value < 0:
+                        for y, line in enumerate(rs_left.splitlines(), 2):
+                            stdscr.addstr(y+8, 60, line)
+                            stdscr.refresh()
+                    
+                if event.axis == 4:
+                    for y, line in enumerate(header.splitlines(), 2):
+                        stdscr.addstr(y, 60, line)
+                        stdscr.refresh()
+                    if event.value > 0 and event.value > 0.800:
+                        for y, line in enumerate(rs_down.splitlines(), 2):
+                            stdscr.addstr(y+8, 60, line)
+                            stdscr.refresh()
+                    elif event.value < -0.5:
+                    	for y, line in enumerate(rs_up.splitlines(), 2):
+                            stdscr.addstr(y+8, 60, line)
+                            stdscr.refresh()     
+             
+#############################    Left and right triggers go down here    #########################################################
+
                 if event.axis == 2:
                     if event.value == 1:
-                        stdscr.addstr(3, 112, "     ")
-                        stdscr.addstr(3, 112, "_____")
+                        stdscr.addstr(3, 74, "     ")
+                        stdscr.addstr(3, 74, "_____")
                     if event.value < 1:
                         #stdscr.clear()
                         for y, line in enumerate(header.splitlines(), 2):
                             stdscr.addstr(y, 60, line)
                 if event.axis == 5:
                     if event.value == 1:
-                        stdscr.addstr(3, 74, "     ")
-                        stdscr.addstr(3, 74, "_____")
+                        stdscr.addstr(3, 112, "     ")
+                        stdscr.addstr(3, 112, "_____")
                     if event.value < 1:
                         #stdscr.clear()
                         for y, line in enumerate(header.splitlines(), 2):
