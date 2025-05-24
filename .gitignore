@@ -1,4 +1,5 @@
 /__pycache__
+__pycache__/
 ascii_ps2_controller.txt
 ah.py
 eh.py
