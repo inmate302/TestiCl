@@ -1,11 +1,4 @@
-# /// script
-# dependencies = [
-#   "pygame",
-# ]
-# ///
-
-'# coding=utf-8'
-
+#!/usr/bin/env python3
 import os
 import sys
 
@@ -17,4 +10,4 @@ from src.main import main
 from curses import wrapper
 
 if __name__ == "__main__":
-    wrapper(main)
+    wrapper(main) 
