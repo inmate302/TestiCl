@@ -3,7 +3,9 @@ import curses
 from ..art.ascii_art import (
     HEADER, LS_UP, LS_DOWN, LS_LEFT, LS_RIGHT,
     RS_UP, RS_DOWN, RS_LEFT, RS_RIGHT, OPPOSITES_LR, OPPOSITES_RL,
-    OPPOSITES_UD, OPPOSITES_DU, BOTH_LEFT, BOTH_RIGHT, BOTH_UP, BOTH_DOWN
+    OPPOSITES_UD, OPPOSITES_DU, BOTH_LEFT, BOTH_RIGHT, BOTH_UP, BOTH_DOWN,
+    LSDOWN_RSLEFT, LSDOWN_RSRIGHT, LSUP_RSLEFT, LSUP_RSRIGHT,
+    RSDOWN_LSLEFT, RSDOWN_LSRIGHT, RSUP_LSLEFT, RSUP_LSRIGHT
 )
 
 class GamepadHandler:
@@ -75,6 +77,44 @@ class GamepadHandler:
                 stdscr.refresh()
         elif (self.ls_down and self.rs_down):
             for y, line in enumerate(BOTH_DOWN.splitlines(), 2):
+                stdscr.addstr(y+8, 60, line)
+                stdscr.refresh()
+        else:
+            for y, line in enumerate(HEADER.splitlines(), 2):
+                stdscr.addstr(y, 60, line)
+                stdscr.refresh()
+    def check_other_movements(self, stdscr):
+        """Check for and display other thumbstick simultaneous movements."""
+        if (self.ls_down and self.rs_left):
+            for y, line in enumerate(LSDOWN_RSLEFT.splitlines(), 2):
+                stdscr.addstr(y+8, 60, line)
+                stdscr.refresh()
+        elif (self.ls_down and self.rs_right):
+            for y, line in enumerate(LSDOWN_RSRIGHT.splitlines(), 2):
+                stdscr.addstr(y+8, 60, line)
+                stdscr.refresh()
+        elif (self.ls_up and self.rs_left):
+            for y, line in enumerate(LSUP_RSLEFT.splitlines(), 2):
+                stdscr.addstr(y+8, 60, line)
+                stdscr.refresh()
+        elif (self.ls_up and self.rs_right):
+            for y, line in enumerate(LSUP_RSRIGHT.splitlines(), 2):
+                stdscr.addstr(y+8, 60, line)
+                stdscr.refresh()
+        elif (self.rs_down and self.ls_left):
+            for y, line in enumerate(RSDOWN_LSLEFT.splitlines(), 2):
+                stdscr.addstr(y+8, 60, line)
+                stdscr.refresh()
+        elif (self.rs_down and self.ls_right):
+            for y, line in enumerate(RSDOWN_LSRIGHT.splitlines(), 2):
+                stdscr.addstr(y+8, 60, line)
+                stdscr.refresh()
+        elif (self.rs_up and self.ls_left):
+            for y, line in enumerate(RSUP_LSLEFT.splitlines(), 2):
+                stdscr.addstr(y+8, 60, line)
+                stdscr.refresh()
+        elif (self.rs_up and self.ls_right):
+            for y, line in enumerate(RSUP_LSRIGHT.splitlines(), 2):
                 stdscr.addstr(y+8, 60, line)
                 stdscr.refresh()
         else:
@@ -157,6 +197,8 @@ class GamepadHandler:
                 self.check_opposite_movements(stdscr)
             if (self.ls_left and self.rs_left) or (self.ls_right and self.rs_right):
                 self.check_both_movements(stdscr)
+            if (self.rs_down and self.ls_left) or (self.rs_down and self.ls_right) or (self.rs_up and self.ls_left) or (self.rs_up and self.ls_right):
+                self.check_other_movements(stdscr)
 
         if event.axis == 1:  # Left stick Y
             self.ls_up = event.value < - 0.5
@@ -176,6 +218,8 @@ class GamepadHandler:
                 self.check_opposite_movements(stdscr)
             if (self.ls_up and self.rs_up) or (self.ls_down and self.rs_down):
                 self.check_both_movements(stdscr)
+            if (self.ls_down and self.rs_left) or (self.ls_down and self.rs_right) or (self.ls_up and self.rs_left) or (self.ls_up and self.rs_right):
+                self.check_other_movements(stdscr)
 
         if event.axis == 3:  # Right stick X
             self.rs_left = event.value < 0
@@ -196,6 +240,8 @@ class GamepadHandler:
                 self.check_opposite_movements(stdscr)
             if (self.ls_left and self.rs_left) or (self.ls_right and self.rs_right):
                 self.check_both_movements(stdscr)
+            if (self.ls_down and self.rs_left) or (self.ls_down and self.rs_right) or (self.ls_up and self.rs_left) or (self.ls_up and self.rs_right):
+                self.check_other_movements(stdscr)
 
         if event.axis == 4:  # Right stick Y
             self.rs_up = event.value < - 0.5
@@ -215,6 +261,9 @@ class GamepadHandler:
                 self.check_opposite_movements(stdscr)
             if (self.ls_up and self.rs_up) or (self.ls_down and self.rs_down):
                 self.check_both_movements(stdscr)
+            if (self.rs_down and self.ls_left) or (self.rs_down and self.ls_right) or (self.rs_up and self.ls_left) or (self.rs_up and self.ls_right):
+                self.check_other_movements(stdscr)
+
         if event.axis == 2:  # Left trigger
             if event.value == 1:
                 stdscr.addstr(3, 74, "     ")
