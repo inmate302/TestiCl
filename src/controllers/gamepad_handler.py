@@ -5,7 +5,8 @@ from ..art.ascii_art import (
     RS_UP, RS_DOWN, RS_LEFT, RS_RIGHT, OPPOSITES_LR, OPPOSITES_RL,
     OPPOSITES_UD, OPPOSITES_DU, BOTH_LEFT, BOTH_RIGHT, BOTH_UP, BOTH_DOWN,
     LSDOWN_RSLEFT, LSDOWN_RSRIGHT, LSUP_RSLEFT, LSUP_RSRIGHT,
-    RSDOWN_LSLEFT, RSDOWN_LSRIGHT, RSUP_LSLEFT, RSUP_LSRIGHT
+    RSDOWN_LSLEFT, RSDOWN_LSRIGHT, RSUP_LSLEFT, RSUP_LSRIGHT,
+    LOGO
 )
 
 class GamepadHandler:
@@ -21,6 +22,7 @@ class GamepadHandler:
         self.ls_down = False
         self.rs_up = False
         self.rs_down = False
+        self.c = 0
 
     def check_opposite_movements(self, stdscr):
         """Check for and display opposite thumbstick movements."""
@@ -145,10 +147,24 @@ class GamepadHandler:
         if event.button == 8:
             stdscr.addstr(9, 86, "", curses.A_REVERSE)
         if event.button == 9:
-            stdscr.addstr(14, 87, "LS")
+            stdscr.addstr(14, 87, "L3")
         if event.button == 10:
-            stdscr.addstr(14, 101, "RS")
-
+            stdscr.addstr(14, 101, "R3")
+        if event.button == 9 and event.button == 9:
+            stdscr.bkgd(curses.color_pair(self.c))
+            for y, line in enumerate(LOGO.splitlines(), 2):
+                stdscr.addstr(y, 0, line)
+                stdscr.refresh()
+            stdscr.refresh()
+            self.c += 1
+            if self.c > 8:
+                stdscr.bkgd(curses.color_pair(0))
+                for y, line in enumerate(LOGO.splitlines(), 2):
+                    stdscr.addstr(y, 0, line)
+                    stdscr.refresh()
+                stdscr.refresh()
+                self.c = 0
+                
     def handle_joystick_hat_motion(self, stdscr, event):
         """Handle D-pad input events."""
         if event.hat == 0:
