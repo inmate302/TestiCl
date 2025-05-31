@@ -31,11 +31,11 @@ def display_ascii_art(stdscr, art, start_y=2, start_x=60):
 def display_logo(stdscr, logo, pad):
     """Display the logo using a pad for scrolling effect."""
     for y, line in enumerate(logo.splitlines(), 2):
-        pad.addstr(y, 0, line, 17)
+        pad.addstr(y, 0, line)
     
     for i in range(20):
         stdscr.refresh()
-        pad.refresh(0, 2, 0, 0, i, 42)
+        pad.refresh(0, 0, 0, 0, i, 44)
         time.sleep(0.1)
         if i == 16:
             continue
@@ -45,10 +45,10 @@ def display_controller_name(stdscr, name, y_pos=20, x_pos=86):
     try:
         # Truncate name if it's too long (max 30 characters)
         display_name = name[:30] if len(name) > 30 else name
-        stdscr.addstr(y_pos, x_pos, display_name, 17)
+        stdscr.addstr(y_pos, x_pos, display_name)
     except curses.error:
         # If we still get an error, try a different position
         try:
-            stdscr.addstr(y_pos, 60, display_name, 17)
+            stdscr.addstr(y_pos, 60, display_name)
         except curses.error:
             pass  # Silently fail if still can't display it 
