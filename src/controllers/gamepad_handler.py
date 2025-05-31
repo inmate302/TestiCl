@@ -150,7 +150,7 @@ class GamepadHandler:
             stdscr.addstr(14, 87, "L3")
         if event.button == 10:
             stdscr.addstr(14, 101, "R3")
-        if event.button == 9 and event.button == 9:
+        if event.button == 9 and event.button == 9 or event.button == 7:
             stdscr.bkgd(curses.color_pair(self.c))
             for y, line in enumerate(LOGO.splitlines(), 2):
                 stdscr.addstr(y, 0, line)
