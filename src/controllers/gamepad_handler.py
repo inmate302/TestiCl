@@ -1,5 +1,7 @@
 import pygame
 import curses
+import os
+import sys
 from ..art.ascii_art import (
     HEADER, LS_UP, LS_DOWN, LS_LEFT, LS_RIGHT,
     RS_UP, RS_DOWN, RS_LEFT, RS_RIGHT, OPPOSITES_LR, OPPOSITES_RL,
@@ -8,9 +10,11 @@ from ..art.ascii_art import (
     RSDOWN_LSLEFT, RSDOWN_LSRIGHT, RSUP_LSLEFT, RSUP_LSRIGHT,
     LOGO
 )
+from .controller_mapping import parse_gamecontrollerdb, get_default_mapping
+
 
 class GamepadHandler:
-    def __init__(self):
+    def __init__(self,):
         pygame.init()
         self.joysticks = {}
         self.done = False
@@ -23,7 +27,55 @@ class GamepadHandler:
         self.rs_up = False
         self.rs_down = False
         self.c = 0
-
+        self.controller = None
+        try:
+            self.joystick = pygame.joystick.Joystick(0)
+            self.joystick.init()
+            self.controller_guid = self.joystick.get_guid()
+            
+        except pygame.error:
+            self.joystick = None
+            self.controller_guid = None
+        if getattr(sys, 'frozen', False):
+            self.script_dir = os.path.dirname(sys.executable)
+        else:
+            self.script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.relative_path = '../gamecontrollerdb.txt'
+        self.controller_mappings = parse_gamecontrollerdb(os.path.join(self.script_dir, self.relative_path))
+        self.default_mapping = get_default_mapping(self.controller_guid, self.controller_mappings)
+        
+        if self.controller_guid not in self.controller_mappings and self.controller_guid != None:
+            raise Exception(f"Agregale ESTA {self.controller_guid}, Nelsito")
+        elif self.controller_guid == None:
+            pass
+        
+        
+        """   
+        self.controller = None
+        try:
+            self.joystick = pygame.joystick.Joystick(0)
+        except pygame.error:
+            pass
+        self.controller_guid = self.controller.get_guid()
+        self.script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.relative_path = '../gamecontrollerdb.txt'
+        self.controller_mappings = parse_gamecontrollerdb(os.path.join(self.script_dir, self.relative_path))
+        self.default_mapping = get_default_mapping(self.controller_guid, self.controller_mappings)
+"""
+       
+    def update_controller(self):
+        try:
+            self.joystick = pygame.joystick.Joystick(0)
+            self.joystick.init()
+            self.controller_guid = self.joystick.get_guid()
+            self.controller_mappings = parse_gamecontrollerdb(os.path.join(self.script_dir, self.relative_path))
+            self.default_mapping = get_default_mapping(self.controller_guid, self.controller_mappings)
+        except pygame.error:
+            self.joystick = None
+            self.controller_guid = None
+            self.controller_mappings = None
+            self.default_mapping = None
+        
     def check_opposite_movements(self, stdscr):
         """Check for and display opposite thumbstick movements."""
         if (self.ls_left and self.rs_right):
@@ -85,6 +137,7 @@ class GamepadHandler:
             for y, line in enumerate(HEADER.splitlines(), 2):
                 stdscr.addstr(y, 60, line)
                 stdscr.refresh()
+
     def check_other_movements(self, stdscr):
         """Check for and display other thumbstick simultaneous movements."""
         if (self.ls_down and self.rs_left):
@@ -124,49 +177,76 @@ class GamepadHandler:
                 stdscr.addstr(y, 60, line)
                 stdscr.refresh()
 
+
     def handle_joystick_button_down(self, stdscr, event):
         """Handle joystick button press events."""
-        if event.button == 0:
+        self.update_controller()
+        A = int(self.default_mapping[0][0])
+        B = int(self.default_mapping[1][0])
+        back = int(self.default_mapping[2][0])
+        guide = int(self.default_mapping[7][0])
+        leftshoulder = int(self.default_mapping[8][0])
+        leftstick = int(self.default_mapping[9][0])
+        rightshoulder = int(self.default_mapping[13][0])
+        rightstick = int(self.default_mapping[14][0])
+        start = int(self.default_mapping[18][0])
+        X = int(self.default_mapping[19][0])
+        Y = int(self.default_mapping[20][0])
+        lefttrigger = int(self.default_mapping[10][0])
+        righttrigger = int(self.default_mapping[15][0])
+        
+        if event.button == A:
             stdscr.addstr(11, 113, "   ", curses.A_REVERSE)
-        if event.button == 1:
+        if event.button == B:
             stdscr.addstr(9, 118, "   ", curses.A_REVERSE)
-        if event.button == 2:
+        if event.button == X:
             stdscr.addstr(9, 108, "   ", curses.A_REVERSE)
-        if event.button == 3:
+        if event.button == Y:
             stdscr.addstr(7, 113, "   ", curses.A_REVERSE)
-        if event.button == 4:
+        if event.button == leftshoulder:
             stdscr.addstr(4, 74, "     ")
             stdscr.addstr(4, 74, "_____")
-        if event.button == 5:
+        if event.button == rightshoulder:
             stdscr.addstr(4, 112, "     ")
             stdscr.addstr(4, 112, "_____")
-        if event.button == 6:
+        if event.button == lefttrigger:
+            stdscr.addstr(3, 74, "     ")
+            stdscr.addstr(3, 74, "_____")
+        if event.button == righttrigger:
+            stdscr.addstr(3, 112, "     ")
+            stdscr.addstr(3, 112, "_____")
+        if event.button == back:
             stdscr.addstr(9, 88, "   ", curses.A_REVERSE)
-        if event.button == 7:
+        if event.button == start:
             stdscr.addstr(9, 100, "   ", curses.A_REVERSE)
-        if event.button == 8:
-            stdscr.addstr(9, 86, "", curses.A_REVERSE)
-        if event.button == 9:
+        if event.button == guide:
+            stdscr.addstr(9, 86, "   ", curses.A_REVERSE)
+        if event.button == leftstick:
             stdscr.addstr(14, 87, "L3")
-        if event.button == 10:
+        if event.button == rightstick:
             stdscr.addstr(14, 101, "R3")
-        if event.button == 9 and event.button == 9 or event.button == 7:
+        if event.button == leftstick and event.button == rightstick or event.button == start:
             stdscr.bkgd(curses.color_pair(self.c))
             for y, line in enumerate(LOGO.splitlines(), 2):
                 stdscr.addstr(y, 0, line)
                 stdscr.refresh()
             stdscr.refresh()
             self.c += 1
-            if self.c > 8:
+            if self.c > 10:
                 stdscr.bkgd(curses.color_pair(0))
                 for y, line in enumerate(LOGO.splitlines(), 2):
                     stdscr.addstr(y, 0, line)
                     stdscr.refresh()
                 stdscr.refresh()
                 self.c = 0
-                
+
     def handle_joystick_hat_motion(self, stdscr, event):
         """Handle D-pad input events."""
+        self.update_controller()
+        dpdown = self.default_mapping[3][0]
+        dpleft = self.default_mapping[4][0]
+        dpright = self.default_mapping[5][0]
+        dpup = self.default_mapping[6][0]
         if event.hat == 0:
             if event.value == (-1,0):
                 stdscr.addstr(9, 71, "   ", curses.A_REVERSE)
@@ -194,7 +274,15 @@ class GamepadHandler:
 
     def handle_joystick_axis_motion(self, stdscr, event):
         """Handle analog stick and trigger input events."""
-        if event.axis == 0:  # Left stick X
+        #self.update_controller()
+        leftx = int(self.default_mapping[11][0])
+        lefty = int(self.default_mapping[12][0])
+        lefttrigger = int(self.default_mapping[10][0])
+        rightx = int(self.default_mapping[16][0])
+        righty = int(self.default_mapping[17][0])
+        righttrigger = int(self.default_mapping[15][0])
+
+        if event.axis == leftx:  # Left stick X
             self.ls_left = event.value < 0
             self.ls_right = event.value == 1
             #if not (self.ls_left or self.ls_right):
@@ -216,7 +304,7 @@ class GamepadHandler:
             if (self.rs_down and self.ls_left) or (self.rs_down and self.ls_right) or (self.rs_up and self.ls_left) or (self.rs_up and self.ls_right):
                 self.check_other_movements(stdscr)
 
-        if event.axis == 1:  # Left stick Y
+        if event.axis == lefty:  # Left stick Y
             self.ls_up = event.value < - 0.5
             self.ls_down = event.value > 0.800
             for y, line in enumerate(HEADER.splitlines(), 2):
@@ -237,7 +325,7 @@ class GamepadHandler:
             if (self.ls_down and self.rs_left) or (self.ls_down and self.rs_right) or (self.ls_up and self.rs_left) or (self.ls_up and self.rs_right):
                 self.check_other_movements(stdscr)
 
-        if event.axis == 3:  # Right stick X
+        if event.axis == rightx:  # Right stick X
             self.rs_left = event.value < 0
             self.rs_right = event.value == 1
             #if not (self.rs_left or self.rs_right):
@@ -259,7 +347,7 @@ class GamepadHandler:
             if (self.ls_down and self.rs_left) or (self.ls_down and self.rs_right) or (self.ls_up and self.rs_left) or (self.ls_up and self.rs_right):
                 self.check_other_movements(stdscr)
 
-        if event.axis == 4:  # Right stick Y
+        if event.axis == righty:  # Right stick Y
             self.rs_up = event.value < - 0.5
             self.rs_down = event.value > 0.800
             for y, line in enumerate(HEADER.splitlines(), 2):
@@ -280,7 +368,7 @@ class GamepadHandler:
             if (self.rs_down and self.ls_left) or (self.rs_down and self.ls_right) or (self.rs_up and self.ls_left) or (self.rs_up and self.ls_right):
                 self.check_other_movements(stdscr)
 
-        if event.axis == 2:  # Left trigger
+        if event.axis == lefttrigger:  # Left trigger
             if event.value == 1:
                 stdscr.addstr(3, 74, "     ")
                 stdscr.addstr(3, 74, "_____")
@@ -288,7 +376,7 @@ class GamepadHandler:
                 for y, line in enumerate(HEADER.splitlines(), 2):
                     stdscr.addstr(y, 60, line)
 
-        if event.axis == 5:  # Right trigger
+        if event.axis == righttrigger:  # Right trigger
             if event.value == 1:
                 stdscr.addstr(3, 112, "     ")
                 stdscr.addstr(3, 112, "_____")
@@ -305,6 +393,7 @@ class GamepadHandler:
 
     def handle_joystick_device_added(self, stdscr, event):
         """Handle controller connection events."""
+        self.update_controller()
         joy = pygame.joystick.Joystick(event.device_index)
         self.joysticks[joy.get_instance_id()] = joy
         stdscr.refresh()
