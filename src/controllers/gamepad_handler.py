@@ -58,7 +58,7 @@ class GamepadHandler:
             pass
         self.controller_guid = self.controller.get_guid()
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
-        self.relative_path = '../gamecontrollerdb.txt'
+        self.relative_path = 'gamecontrollerdb.txt'
         self.controller_mappings = parse_gamecontrollerdb(os.path.join(self.script_dir, self.relative_path))
         self.default_mapping = get_default_mapping(self.controller_guid, self.controller_mappings)
 """
