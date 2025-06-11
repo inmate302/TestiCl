@@ -36,7 +36,9 @@ def main(stdscr):
     curses.init_color(6, 0, 0, 501) #NAVY_BLUE
     curses.init_color(7, 223, 1000, 78) #GREEN
     curses.init_color(8, 1000, 647, 0) #ORANGE
-    curses.init_color(9, 0, 129, 278)
+    curses.init_color(9, 0, 129, 278) 
+    curses.init_color(10, 980, 854, 866) #PALE_PINK
+    curses.init_color(11, 400, 7, 235) #PURPLE
     curses.init_pair(1, curses.COLOR_BLACK, 3)
     curses.init_pair(2, curses.COLOR_WHITE, 4)    
     curses.init_pair(3, 2, 1)
@@ -46,6 +48,8 @@ def main(stdscr):
     curses.init_pair(7, 7, curses.COLOR_BLACK)
     curses.init_pair(8, curses.COLOR_RED, curses.COLOR_BLACK)
     curses.init_pair(9, 8, 9)
+    curses.init_pair(10, 2, 10)
+    curses.init_pair(11, 3, 11)
     color_pair_list = (0, 1, 2 ,3)
     stdscr.nodelay(1)
     
