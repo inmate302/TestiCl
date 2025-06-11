@@ -43,26 +43,16 @@ class GamepadHandler:
         self.relative_path = '../gamecontrollerdb.txt'
         self.controller_mappings = parse_gamecontrollerdb(os.path.join(self.script_dir, self.relative_path))
         self.default_mapping = get_default_mapping(self.controller_guid, self.controller_mappings)
-        
+        """
         if self.controller_guid not in self.controller_mappings and self.controller_guid != None:
             raise Exception(f"Agregale ESTA {self.controller_guid}, Nelsito")
         elif self.controller_guid == None:
+            pass"""
+        if self.controller_guid not in self.controller_mappings and self.controller_guid != None:
+            self.default_mapping = {0: '0', 1: '1', 2: '6', 3: '04', 4: '08', 5: '02', 6: '01', 7: '10', 8: '4', 9: '8', 10: '2', 11: '0', 12: '1', 13: '5', 14: '9', 15: '5', 16: '3', 17: '4', 18: '7', 19: '2', 20: '3', 21: '', 22: ''}
+        elif self.controller_guid == None:
             pass
-        
-        
-        """   
-        self.controller = None
-        try:
-            self.joystick = pygame.joystick.Joystick(0)
-        except pygame.error:
-            pass
-        self.controller_guid = self.controller.get_guid()
-        self.script_dir = os.path.dirname(os.path.abspath(__file__))
-        self.relative_path = 'gamecontrollerdb.txt'
-        self.controller_mappings = parse_gamecontrollerdb(os.path.join(self.script_dir, self.relative_path))
-        self.default_mapping = get_default_mapping(self.controller_guid, self.controller_mappings)
-"""
-       
+               
     def update_controller(self):
         try:
             self.joystick = pygame.joystick.Joystick(0)
@@ -75,6 +65,11 @@ class GamepadHandler:
             self.controller_guid = None
             self.controller_mappings = None
             self.default_mapping = None
+            
+        if self.controller_guid not in self.controller_mappings and self.controller_guid != None:
+            self.default_mapping = {0: '0', 1: '1', 2: '6', 3: '04', 4: '08', 5: '02', 6: '01', 7: '10', 8: '4', 9: '8', 10: '2', 11: '0', 12: '1', 13: '5', 14: '9', 15: '5', 16: '3', 17: '4', 18: '7', 19: '2', 20: '3', 21: '', 22: ''}
+        elif self.controller_guid == None:
+            pass
         
     def check_opposite_movements(self, stdscr):
         """Check for and display opposite thumbstick movements."""
