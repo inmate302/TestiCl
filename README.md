@@ -37,13 +37,16 @@ NOTE: requires the `TERM=xterm-256color` ENV to be set
 
 ###########################   TODO   ###########################
 
-   - Finish presentation details.
-   - Make the device name be centered.
+   - Finish presentation details. ✓
+   - Make the device name be centered. ✓
    - Test display of battery for wireless controllers.
-   - Manage to get different configurations
-     working (to display the buttons correctly).
+   - Manage to get different configurations 
+     working (to display the buttons correctly). ✓
    - Make different "skins"
-   - make .exe for non dev friends(?)
+   - Make binaries for non dev friends(?) ✓
+   - Add more quotes!
+   - Add default mappings for PS & Nintendo controllers
+     (Xbox only for now).
 </pre>
 
 1. https://docs.astral.sh/uv/getting-started/installation
