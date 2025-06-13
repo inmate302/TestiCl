@@ -56,5 +56,13 @@ QUOTES = r"""
 "Batsuzangaisei Kikokushuushuu Yuegoukinari"
 "Scislac Busorez"
 "..."
-"Otoko no ippatsu da, kora!" 
+"Otoko no ippatsu da, kora!"
+"The answer lies in the Heart of Battle."
+"Kore ga...Kusanagi no ken da!"
+"GET OVER HERE!"
+"Oooh... Nasty!"
+uwu
+owo
+ewe
+(╯’□’)╯︵ ┻━┻
 """
