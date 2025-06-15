@@ -69,4 +69,6 @@ ewe
 "Hadouken!"
 "ATACTACDUKEN!"
 "What is a man? A miserable little pile of secrets!"
+"GIT GUD!"
+"YOU DIED"
 """
