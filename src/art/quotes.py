@@ -66,4 +66,7 @@ owo
 ewe
 (╯’□’)╯︵ ┻━┻
 "ATATATATATATATATATATATATATATATATATATATATATATATA"
+"Hadouken!"
+"ATACTACDUKEN!"
+"What is a man? A miserable little pile of secrets!"
 """
