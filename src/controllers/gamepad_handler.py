@@ -27,11 +27,12 @@ class GamepadHandler:
         self.rs_up = False
         self.rs_down = False
         self.c = 0
-        self.controller = None
+        self.name = None
         try:
             self.joystick = pygame.joystick.Joystick(0)
             self.joystick.init()
             self.controller_guid = self.joystick.get_guid()
+            self.name = self.joystick.get_name()
             
         except pygame.error:
             self.joystick = None
@@ -40,19 +41,41 @@ class GamepadHandler:
             self.script_dir = os.path.dirname(sys.executable)
         else:
             self.script_dir = os.path.dirname(os.path.abspath(__file__))
-        self.relative_path = '../gamecontrollerdb.txt'
+        self.relative_path = 'gamecontrollerdb.txt'
         self.controller_mappings = parse_gamecontrollerdb(os.path.join(self.script_dir, self.relative_path))
         self.default_mapping = get_default_mapping(self.controller_guid, self.controller_mappings)
-        """
-        if self.controller_guid not in self.controller_mappings and self.controller_guid != None:
+        
+        """if self.controller_guid not in self.controller_mappings and self.controller_guid != None:
             raise Exception(f"Agregale ESTA {self.controller_guid}, Nelsito")
         elif self.controller_guid == None:
             pass"""
+
         if self.controller_guid not in self.controller_mappings and self.controller_guid != None:
-            self.default_mapping = {0: '0', 1: '1', 2: '6', 3: '04', 4: '08', 5: '02', 6: '01', 7: '10', 8: '4', 9: '8', 10: '2', 11: '0', 12: '1', 13: '5', 14: '9', 15: '5', 16: '3', 17: '4', 18: '7', 19: '2', 20: '3', 21: '', 22: ''}
+            nintendont = ("Switch", "Nintendo", "SN30", "SFC", "SNES")
+            pureisuteshon = ("PS", "PS2", "PS3", "PS4", "PS5", "playstation")
+            for i in self.controller_mappings:
+                if any(i in self.name for i in nintendont ):
+                    self.default_mapping = {0: '0', 1: '1', 2: '4', 3: '12', 4: '13', 5: '14', 6: '11', 7: '5', 8: '9', 9: '4', 10: '7', 11: '4', 12: '0', 13: '1', 14: '15', 15: '10', 16: '8', 17: '5', 18: '2', 19: '3', 20: '6', 21: '2', 22: '3'}
+                elif any(i in self.name for i in pureisuteshon):
+                    self.default_mapping = {0: '0', 1: '1', 2: '4', 3: '12', 4: '13', 5: '14', 6: '11', 7: '5', 8: '9', 9: '7', 10: '4', 11: '4', 12: '0', 13: '1', 14: '10', 15: '8', 16: '5', 17: '3', 18: '4', 19: '3', 20: '9', 21: '13', 22: '2', 23: '3'}                
+                else:
+                    self.default_mapping = {0: '0', 1: '1', 2: '6', 3: '04', 4: '08', 5: '02', 6: '01', 7: '10', 8: '4', 9: '8', 10: '2', 11: '0', 12: '1', 13: '5', 14: '9', 15: '5', 16: '3', 17: '4', 18: '7', 19: '2', 20: '3', 21: '', 22: ''}
         elif self.controller_guid == None:
             pass
-               
+        
+        """   
+        self.controller = None
+        try:
+            self.joystick = pygame.joystick.Joystick(0)
+        except pygame.error:
+            pass
+        self.controller_guid = self.controller.get_guid()
+        self.script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.relative_path = '../gamecontrollerdb.txt'
+        self.controller_mappings = parse_gamecontrollerdb(os.path.join(self.script_dir, self.relative_path))
+        self.default_mapping = get_default_mapping(self.controller_guid, self.controller_mappings)
+"""
+       
     def update_controller(self):
         try:
             self.joystick = pygame.joystick.Joystick(0)
@@ -65,11 +88,20 @@ class GamepadHandler:
             self.controller_guid = None
             self.controller_mappings = None
             self.default_mapping = None
-            
+
         if self.controller_guid not in self.controller_mappings and self.controller_guid != None:
-            self.default_mapping = {0: '0', 1: '1', 2: '6', 3: '04', 4: '08', 5: '02', 6: '01', 7: '10', 8: '4', 9: '8', 10: '2', 11: '0', 12: '1', 13: '5', 14: '9', 15: '5', 16: '3', 17: '4', 18: '7', 19: '2', 20: '3', 21: '', 22: ''}
+            nintendont = ("Switch", "Nintendo", "SN30", "SFC", "SNES")
+            pureisuteshon = ("PS", "PS2", "PS3", "PS4", "PS5", "playstation")
+            for i in self.controller_mappings:
+                if any(i in self.name for i in nintendont ):
+                    self.default_mapping = {0: '0', 1: '1', 2: '4', 3: '12', 4: '13', 5: '14', 6: '11', 7: '5', 8: '9', 9: '4', 10: '7', 11: '4', 12: '0', 13: '1', 14: '15', 15: '10', 16: '8', 17: '5', 18: '2', 19: '3', 20: '6', 21: '2', 22: '3'}
+                elif any(i in self.name for i in pureisuteshon):
+                    self.default_mapping = {0: '0', 1: '1', 2: '4', 3: '12', 4: '13', 5: '14', 6: '11', 7: '5', 8: '9', 9: '7', 10: '4', 11: '4', 12: '0', 13: '1', 14: '10', 15: '8', 16: '5', 17: '3', 18: '4', 19: '3', 20: '9', 21: '13', 22: '2', 23: '3'}
+                else:
+                    self.default_mapping = {0: '0', 1: '1', 2: '6', 3: '04', 4: '08', 5: '02', 6: '01', 7: '10', 8: '4', 9: '8', 10: '2', 11: '0', 12: '1', 13: '5', 14: '9', 15: '5', 16: '3', 17: '4', 18: '7', 19: '2', 20: '3', 21: '', 22: ''}
         elif self.controller_guid == None:
             pass
+        
         
     def check_opposite_movements(self, stdscr):
         """Check for and display opposite thumbstick movements."""
@@ -211,7 +243,7 @@ class GamepadHandler:
             stdscr.addstr(3, 112, "     ")
             stdscr.addstr(3, 112, "_____")
         if event.button == back:
-            stdscr.addstr(9, 88, "   ", curses.A_REVERSE)
+            stdscr.addstr(9, 88 , "   ", curses.A_REVERSE)
         if event.button == start:
             stdscr.addstr(9, 100, "   ", curses.A_REVERSE)
         if event.button == guide:
@@ -220,20 +252,21 @@ class GamepadHandler:
             stdscr.addstr(14, 87, "L3")
         if event.button == rightstick:
             stdscr.addstr(14, 101, "R3")
-        if event.button == leftstick and event.button == rightstick or event.button == start:
+        if event.button == leftstick and event.button == rightstick or event.button == back:
             stdscr.bkgd(curses.color_pair(self.c))
             for y, line in enumerate(LOGO.splitlines(), 2):
                 stdscr.addstr(y, 0, line)
                 stdscr.refresh()
             stdscr.refresh()
             self.c += 1
-            if self.c > 10:
+            if self.c > 12:
                 stdscr.bkgd(curses.color_pair(0))
                 for y, line in enumerate(LOGO.splitlines(), 2):
                     stdscr.addstr(y, 0, line)
                     stdscr.refresh()
                 stdscr.refresh()
                 self.c = 0
+                
 
     def handle_joystick_hat_motion(self, stdscr, event):
         """Handle D-pad input events."""
