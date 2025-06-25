@@ -5,3 +5,8 @@ ah.py
 eh.py
 example.py
 header.py
+.env
+.env*
+*.env
+*.env*
+testicl.log
