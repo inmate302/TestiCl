@@ -72,4 +72,27 @@ ewe
 "GIT GUD!"
 "YOU DIED"
 "You should really try tattoy..."
+"Your lack of faith disturbs me."
+“Fus Ro Dah!”
+"I know you Raziel"
+“It’s super effective!”
+"No lollygagging!"
+“Are you a bad enough dude to rescue the President?”
+“Welcome to your doom!”
+" I'm no hero. Never was. Never will be."
+"Feel the wrath of Shao Kahn!"
+"I've got balls of steel!"
+"Omae Wa Mou Shindeiru"
+"C-C-C-C-Combo Breaker!"
+"You want me to show you tough, I'll show you tough."
+"I hope you like pain!"
+"I need your clothes, your Boots and your motorcycle.
+"GET TO THE CHOPPAH!"
+"Señor Joe, the numbers don't lie, and they spell disaster for you at Sacrifice!"
+"FAT ASSES!"
+"No hay problema!"
+"No problemo!"
+"1.21 Gigawatts!"
+"¿Por qué no rompes una taza y te largas de aquí?"
+"Es "Rompe una taza y se va a su casa" ¡suenas como un idiota cuando lo dices!"
 """
