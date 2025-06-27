@@ -247,7 +247,7 @@ class GamepadHandler:
         if event.button == start:
             stdscr.addstr(9, 100, "   ", curses.A_REVERSE)
         if event.button == guide:
-            stdscr.addstr(9, 86, "   ", curses.A_REVERSE)
+            stdscr.addstr(12, 93, "   ", curses.A_REVERSE)
         if event.button == leftstick:
             stdscr.addstr(14, 87, "L3")
         if event.button == rightstick:
