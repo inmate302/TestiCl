@@ -33,7 +33,7 @@ NOTE: before you run it, make sure your terminal is maximized
       If you're on Windows you can still run it outside a terminal
       but resizing breaks the program :c
 
-NOTE: requires the `TERM=xterm-256color` ENV to be set 
+NOTE: requires the `TERM=xterm-256color` ENV to be set
 
 ###########################   TODO   ###########################
 
@@ -45,8 +45,8 @@ NOTE: requires the `TERM=xterm-256color` ENV to be set
    - Make different "skins"
    - Make binaries for non dev friends(?) ✓
    - Add more quotes!
-   - Add default mappings for PS & Nintendo controllers
-     (Xbox only for now).
+   - Add default mappings for PS & Nintendo controllers ✓
+   - Fix multiple buttons displayed at once
 </pre>
 
 1. https://docs.astral.sh/uv/getting-started/installation
