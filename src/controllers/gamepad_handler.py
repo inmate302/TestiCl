@@ -208,19 +208,19 @@ class GamepadHandler:
     def handle_joystick_button_down(self, stdscr, event):
         """Handle joystick button press events."""
         self.update_controller()
-        A = int(self.default_mapping[0][0])
-        B = int(self.default_mapping[1][0])
-        back = int(self.default_mapping[2][0])
-        guide = int(self.default_mapping[7][0])
-        leftshoulder = int(self.default_mapping[8][0])
-        leftstick = int(self.default_mapping[9][0])
-        rightshoulder = int(self.default_mapping[13][0])
-        rightstick = int(self.default_mapping[14][0])
-        start = int(self.default_mapping[18][0])
-        X = int(self.default_mapping[19][0])
-        Y = int(self.default_mapping[20][0])
-        lefttrigger = int(self.default_mapping[10][0])
-        righttrigger = int(self.default_mapping[15][0])
+        A = int(self.default_mapping[0])
+        B = int(self.default_mapping[1])
+        back = int(self.default_mapping[2])
+        guide = int(self.default_mapping[7])
+        leftshoulder = int(self.default_mapping[8])
+        leftstick = int(self.default_mapping[9])
+        rightshoulder = int(self.default_mapping[13])
+        rightstick = int(self.default_mapping[14])
+        start = int(self.default_mapping[18])
+        X = int(self.default_mapping[19])
+        Y = int(self.default_mapping[20])
+        lefttrigger = int(self.default_mapping[10])
+        righttrigger = int(self.default_mapping[15])
         
         if event.button == A:
             stdscr.addstr(11, 113, "   ", curses.A_REVERSE)
@@ -271,10 +271,10 @@ class GamepadHandler:
     def handle_joystick_hat_motion(self, stdscr, event):
         """Handle D-pad input events."""
         self.update_controller()
-        dpdown = self.default_mapping[3][0]
-        dpleft = self.default_mapping[4][0]
-        dpright = self.default_mapping[5][0]
-        dpup = self.default_mapping[6][0]
+        dpdown = self.default_mapping[3]
+        dpleft = self.default_mapping[4]
+        dpright = self.default_mapping[5]
+        dpup = self.default_mapping[6]
         if event.hat == 0:
             if event.value == (-1,0):
                 stdscr.addstr(9, 71, "   ", curses.A_REVERSE)
@@ -303,12 +303,12 @@ class GamepadHandler:
     def handle_joystick_axis_motion(self, stdscr, event):
         """Handle analog stick and trigger input events."""
         #self.update_controller()
-        leftx = int(self.default_mapping[11][0])
-        lefty = int(self.default_mapping[12][0])
-        lefttrigger = int(self.default_mapping[10][0])
-        rightx = int(self.default_mapping[16][0])
-        righty = int(self.default_mapping[17][0])
-        righttrigger = int(self.default_mapping[15][0])
+        leftx = int(self.default_mapping[11])
+        lefty = int(self.default_mapping[12])
+        lefttrigger = int(self.default_mapping[10])
+        rightx = int(self.default_mapping[16])
+        righty = int(self.default_mapping[17])
+        righttrigger = int(self.default_mapping[15])
 
         if event.axis == leftx:  # Left stick X
             self.ls_left = event.value < 0
