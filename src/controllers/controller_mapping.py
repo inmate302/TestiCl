@@ -1,6 +1,5 @@
 import os
 import pygame
-from ..utils.logger import log_message
 
 def parse_gamecontrollerdb(file_path):
     """
@@ -9,8 +8,6 @@ def parse_gamecontrollerdb(file_path):
     """
     controller_mappings = {}
 
-    log_message(f"Parsing gamecontrollerdb.txt file: {file_path}")
-    
     with open(file_path, 'r') as file:
         for line in file:
             line = line.strip()
@@ -28,9 +25,6 @@ def get_default_mapping(controller_guid, controller_mappings):
     Looks up the default button/axis mapping for the given controller GUID in the
     controller_mappings dictionary. Returns the mapping as a dictionary.
     """
-
-    log_message(f"Getting default mapping for controller: {controller_guid}")
-
     if controller_guid in controller_mappings:
         mapping = controller_mappings[controller_guid]
         mapping_parts = mapping.split(',')
