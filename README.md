@@ -50,7 +50,7 @@ NOTE 2: requires the `TERM=xterm-256color` ENV to be set
 </pre>
 1. https://docs.astral.sh/uv/getting-started/installation
 
-Honestly, you'd be better off using the superior [gamepad tool](https://generalarcade.com/gamepadtool)
+Honestly, you'd be better off using the superior [gamepad tool](https://generalarcade.com/gamepadtool) \
 but if you live in the terminal you might want to give TestiCL a try <3
 
    
