@@ -1,4 +1,4 @@
-
+<pre>
 ################################################################
 
             ███████ ███  ██████████ ██ ██████ ██    
@@ -34,11 +34,6 @@ NOTE 1: before you run it, make sure your terminal is maximized
       but resizing breaks the program :c
 
 NOTE 2: requires the `TERM=xterm-256color` ENV to be set
- 
-NOTE 3: Honestly, you'd be better off using the superior
-	[gamepad tool](https://generalarcade.com/gamepadtool) 
- 	but if you live in the terminal, 
-	you might want to give TestiCL a try <3
 
 ###########################   TODO   ###########################
 
@@ -52,6 +47,10 @@ NOTE 3: Honestly, you'd be better off using the superior
    - Add more quotes!
    - Add default mappings for PS & Nintendo controllers ✓
    - Fix multiple buttons displayed at once ✓
-
+</pre>
 1. https://docs.astral.sh/uv/getting-started/installation
+
+Honestly, you'd be better off using the superior [gamepad tool](https://generalarcade.com/gamepadtool)
+but if you live in the terminal you might want to give TestiCL a try <3
+
    
