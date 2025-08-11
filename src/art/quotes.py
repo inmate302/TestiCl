@@ -95,4 +95,8 @@ ewe
 "1.21 Gigawatts!"
 "¿Por qué no rompes una taza y te largas de aquí?"
 "Es "Rompe una taza y se va a su casa" ¡suenas como un idiota cuando lo dices!"
+"KANEEEEDAAA!"
+Thank you for playing!
+Thank you for playing with my TestiCL!
+Thank you for testing my TestiCL!
 """
