@@ -99,4 +99,5 @@ ewe
 Thank you for playing!
 Thank you for playing with my TestiCL!
 Thank you for testing my TestiCL!
+"'Cause chicken are decente people."
 """
